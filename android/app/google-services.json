@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "655428128171",
+    "firebase_url": "https://bohni-bohoman.firebaseio.com",
+    "project_id": "bohni-bohoman",
+    "storage_bucket": "bohni-bohoman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655428128171:android:f271f2f0f825a8d925d6ee",
+        "android_client_info": {
+          "package_name": "bonhi.bohoman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655428128171-o810vagf0hcojdpebhguam3dh6q7l2fe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvhD0YZ6l1ZZQRoyKXYBuL_6z_Wtfq1Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655428128171-o810vagf0hcojdpebhguam3dh6q7l2fe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
