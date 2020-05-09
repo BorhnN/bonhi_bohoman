@@ -1,10 +1,13 @@
+
+import 'package:bonhi_bohoman/donor.dart';
+import 'package:bonhi_bohoman/donors_fragment.dart';
 import 'package:bonhi_bohoman/recipeints_fragment.dart';
 import 'package:bonhi_bohoman/recipient.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'doners.dart';
+
 import 'home.dart';
 
 void main() => runApp(MyApp());
@@ -36,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _selectedIndex = 0;
   List<Recipient> recipientList = List();
+  List<Donor> donarList = List();
 
   void _incrementCounter() {
     setState(() {});
@@ -51,9 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
         .then((DataSnapshot onValue) {
       Map<dynamic, dynamic> recipients = onValue.value;
       recipientList.clear();
+      // donarList = recipients as List<Doner>;
+      print(donarList.length);
       recipients.forEach((key, value) {
-        Recipient recipient = Recipient.fromMap(value);
+        Recipient recipient =new Recipient.fromMap(value);
         recipientList.add(recipient);
+        donarList.add(new Donor.fromMap(value));
       });
       setState(() {});
     });
@@ -104,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         return Home();
       case 1:
-        return Doners();
+        return DonorsFragment(donarList);
       case 2:
         return RecipientsFragment(recipientList);
       default:

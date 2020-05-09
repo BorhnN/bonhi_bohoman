@@ -9,7 +9,7 @@ class RecipientsFragment extends StatelessWidget {
   final List<Recipient> list;
   @override
   Widget build(BuildContext context) {
-    print(list);
+    // print(list);
     return ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
@@ -22,3 +22,4 @@ class RecipientsFragment extends StatelessWidget {
         });
   }
 }
+
