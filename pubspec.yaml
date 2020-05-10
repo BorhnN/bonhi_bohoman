@@ -27,6 +27,7 @@ dependencies:
   font_awesome_flutter:
   firebase_database:
   firebase_core:
+  percent_indicator: 
 dev_dependencies:
   flutter_test:
     sdk: flutter
