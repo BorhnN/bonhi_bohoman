@@ -1,4 +1,3 @@
-
 import 'package:bonhi_bohoman/donor.dart';
 import 'package:bonhi_bohoman/donors_fragment.dart';
 import 'package:bonhi_bohoman/recipeints_fragment.dart';
@@ -6,7 +5,6 @@ import 'package:bonhi_bohoman/recipient.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 import 'home.dart';
 
@@ -58,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // donarList = recipients as List<Doner>;
       print(donarList.length);
       recipients.forEach((key, value) {
-        Recipient recipient =new Recipient.fromMap(value);
+        Recipient recipient = new Recipient.fromMap(value);
         recipientList.add(recipient);
         donarList.add(new Donor.fromMap(value));
       });
@@ -70,7 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(
+            child: Text(
+          widget.title,
+        )),
       ),
       body: getbody(),
       bottomNavigationBar: BottomNavigationBar(
@@ -81,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.handHoldingHeart),
-            title: Text('Doners'),
+            title: Text('Donors'),
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.handshake),
