@@ -26,19 +26,45 @@ class _HomeState extends State<Home> {
               Row(
                 children: <Widget>[
                   Expanded(
-                    flex: 5,
-                    child: Text(
-                      "Collected: "+data['donation_achived'].toString(),
-                    ),
-                  ),
+                      flex: 5,
+                      child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(color: Colors.black87),
+                              children: [
+                            TextSpan(
+                              text: data['donation_achived'].toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            TextSpan(
+                              text: " ৳",
+                            ),
+                            TextSpan(
+                              text: "\nraised",
+                            ),
+                          ]))),
                   Expanded(
                     flex: 5,
-                    child: Text(
-                      "2 donors",
+                    child: RichText(
                       textAlign: TextAlign.right,
+                      text: TextSpan(
+                          style: TextStyle(color: Colors.black87),
+                          children: [
+                            TextSpan(
+                              text: "4" ,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            TextSpan(
+                              text: "\ndonors",
+                            ),
+                          ]),
                     ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
               ),
               LinearPercentIndicator(
                 animationDuration: 1000,
@@ -47,29 +73,64 @@ class _HomeState extends State<Home> {
                 percent: donationProgress,
                 backgroundColor: Color(0xffDDDDDD),
                 progressColor: Colors.blue,
+                // padding: EdgeInsets.all(15),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
               ),
               Row(
                 children: <Widget>[
                   Expanded(
-                    flex: 5,
-                    child: Text(
-                      "Goal: "+data['donation_goal'].toString(),
-                    ),
-                  ),
+                      flex: 5,
+                      child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(color: Colors.black87),
+                              children: [
+                            TextSpan(
+                              text:
+                                  (donationProgress * 100).toStringAsFixed(1) +
+                                      "% of goal\n",
+                            ),
+                            TextSpan(
+                              text: data['donation_goal'].toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            TextSpan(
+                              text: " ৳",
+                            ),
+                          ]))),
                   Expanded(
                     flex: 5,
-                    child: Text(
-                      data['donation_expiry'].toString() + " days left",
+                    child: RichText(
                       textAlign: TextAlign.right,
+                      text: TextSpan(
+                          style: TextStyle(color: Colors.black87),
+                          children: [
+                            TextSpan(
+                              text: (data['donation_expiry']-DateTime.now().day).toString() ,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            TextSpan(
+                              text: "\ndays left",
+                            ),
+                          ]),
                     ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
               ),
               RaisedButton(
                 onPressed: () {},
                 child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 color: Colors.blue,
                 textColor: Colors.white,
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
               ),
               Text(data['campaign_description']),
             ],
