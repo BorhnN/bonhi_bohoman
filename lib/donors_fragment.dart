@@ -16,8 +16,6 @@ class DonorsFragment extends StatelessWidget {
         var item = list[index];
         return ListTile(
           title: Text(item.name),
-          subtitle: Image.memory(base64Decode(item.photo)),
-          trailing: Text(item.phone),
 
         );
       }
