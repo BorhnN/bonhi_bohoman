@@ -1,53 +1,104 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DonateNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double buttonHeight = 35.0;
+    final double paddingBetween = 10;
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text("Donate Now"),
         ),
       ),
-      body: Container(
-          child: ListView(
-        padding: EdgeInsets.all(15.0),
-        children: <Widget>[
-          RaisedButton.icon(
-            onPressed: () {},
-            icon: Icon(
-              FontAwesomeIcons.paypal,
-              size: 18,
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Container(
+            child: ListView(
+          // padding: EdgeInsets.all(15.0),
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/img/bkash.svg",
+                      height: buttonHeight,
+                    ),
+                  ],
+                ),
+              ),
+              color: Colors.white,
             ),
-            label: Text('bKash', style: TextStyle(fontSize: 18)),
-          ),
-          RaisedButton.icon(
-            onPressed: () {},
-            icon: Icon(
-              FontAwesomeIcons.paypal,
-              size: 18,
+            Padding(
+              padding: EdgeInsets.all(paddingBetween),
             ),
-            label: Text('Rocket', style: TextStyle(fontSize: 18)),
-          ),
-          // RaisedButton.icon(
-          //   onPressed: () {},
-          //   icon: Icon(SvgPicture.asset(assetName)),
-          //   label: Text('DBBL', style: TextStyle(fontSize: 18)),
-          // ),
-
-          new SvgPicture.asset('assets/bkash.svg'),
-          RaisedButton(
-            onPressed: () {},
-            child: Icon(
-              FontAwesomeIcons.paypal,
-              size: 18,
+            RaisedButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/img/rocket.svg",
+                      height: buttonHeight,
+                    ),
+                  ],
+                ),
+              ),
+              color: Color(0xff85278B),
             ),
-          ),
-        ],
-      )),
+            Padding(
+              padding: EdgeInsets.all(paddingBetween),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/img/dbbl.svg",
+                      height: buttonHeight,
+                    ),
+                  ],
+                ),
+              ),
+              color: Colors.white,
+            ),
+            Padding(
+              padding: EdgeInsets.all(paddingBetween),
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "assets/img/paypal.svg",
+                      height: buttonHeight,
+                    ),
+                  ],
+                ),
+              ),
+              color: Color(0xffF8BF37),
+            ),
+          ],
+        )),
+      ),
     );
   }
 }
