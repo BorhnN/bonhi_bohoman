@@ -1,3 +1,4 @@
+import 'package:bonhi_bohoman/donate_now_fragment.dart';
 import 'package:bonhi_bohoman/donor.dart';
 import 'package:bonhi_bohoman/donors_fragment.dart';
 import 'package:bonhi_bohoman/recipeints_fragment.dart';
@@ -18,9 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(
-        title: 'বহ্নি বহমান',
-      ),
+      // home: MyHomePage(
+      //   title: 'বহ্নি বহমান',
+      // ),
+      home: DonateNow(),
     );
   }
 }
