@@ -6,6 +6,8 @@ import 'package:bonhi_bohoman/recipient.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bonhi_bohoman/LoginScreen.dart';
 
 import 'home.dart';
 
@@ -19,10 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: MyHomePage(
-      //   title: 'বহ্নি বহমান',
-      // ),
-      home: DonateNow(),
+      home: MyHomePage(
+        title: 'বহ্নি বহমান',
+      ),
+      // home: DonateNow(),
     );
   }
 }
@@ -48,6 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(seconds: 1)).then((onValue) {
+      FirebaseAuth.instance.currentUser().then(
+        (currentUser) {
+          if (currentUser == null) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => LoginScreen()));
+          }
+        },
+      );
+    });
     FirebaseDatabase.instance
         .reference()
         .child("recipients")
