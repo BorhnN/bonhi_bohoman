@@ -11,8 +11,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future:
-          FirebaseDatabase.instance.reference().child("campaigns/sust").once(),
+      future: FirebaseDatabase.instance
+          .reference()
+          .child("campaigns/sust/details")
+          .once(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data.value;
@@ -51,7 +53,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text: "4" ,
+                              text: "4",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -108,7 +110,9 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text: (data['donation_expiry']-DateTime.now().day).toString() ,
+                              text:
+                                  (data['donation_expiry'] - DateTime.now().day)
+                                      .toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -124,7 +128,21 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(5.0),
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    content: Text('Yay! A SnackBar!'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        // Some code to undo the change.
+                      },
+                    ),
+                  );
+
+                  // Find the Scaffold in the widget tree and use
+                  // it to show a SnackBar.
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
                 child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 color: Colors.blue,
                 textColor: Colors.white,
