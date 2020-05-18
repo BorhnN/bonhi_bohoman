@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
         if (snapshot.hasData) {
           var data = snapshot.data.value;
           double donationProgress =
-              (data['donation_achived'] / data['donation_goal'])
+              (data['totalRaised'] / data['goal'])
                   .clamp(0.0, 1.0);
 
           return ListView(
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
                               style: TextStyle(color: Colors.black87),
                               children: [
                             TextSpan(
-                              text: data['donation_achived'].toString(),
+                              text: data['totalRaised'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
                                       "% of goal\n",
                             ),
                             TextSpan(
-                              text: data['donation_goal'].toString(),
+                              text: data['goal'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                           children: [
                             TextSpan(
                               text:
-                                  (data['donation_expiry'] - DateTime.now().day)
+                                  (31 - DateTime.now().day)
                                       .toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),

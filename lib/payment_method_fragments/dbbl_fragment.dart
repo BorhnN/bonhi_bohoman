@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BkashPayment extends StatefulWidget {
+class DbblPayment extends StatefulWidget {
   @override
-  _BkashPaymentState createState() => _BkashPaymentState();
+  _DbblPaymentState createState() => _DbblPaymentState();
 }
 
-class _BkashPaymentState extends State<BkashPayment> {
-  final String bkashAccountNUmber = "01768212468";
+class _DbblPaymentState extends State<DbblPayment> {
+  final String dbblAccountNumber = "7017016091638";
+  final String dbblAccountName = "MD Shaleh Islam Tonmoy";
   final globalKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
   @override
@@ -18,7 +19,7 @@ class _BkashPaymentState extends State<BkashPayment> {
       key: globalKey,
       appBar: AppBar(
         title: Center(
-          child: Text("Donate with bKash"),
+          child: Text("Donate with Dbbl"),
         ),
       ),
       body: Padding(
@@ -34,32 +35,41 @@ class _BkashPaymentState extends State<BkashPayment> {
                     ),
                     children: [
                       TextSpan(
-                        text: "বিকাশ নাম্বার:",
+                        text: "DBBL A\\C Name:",
                       ),
                       TextSpan(
-                        text: " " + bkashAccountNUmber.toString(),
+                        text: " " + dbblAccountName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          // fontSize: 16,
                           // color: Colors.green,
                         ),
                       ),
                       TextSpan(
-                        text: " (personal)",
+                        text: "\nDBBL A\\C Number:",
+                      ),
+                      TextSpan(
+                        text: " " + dbblAccountNumber,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          // fontSize: 18,
+                          // color: Colors.green,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Expanded(
+                  
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: OutlineButton.icon(
                       onPressed: () {
                         Clipboard.setData(
-                            new ClipboardData(text: bkashAccountNUmber));
+                            new ClipboardData(text: dbblAccountNumber));
 
                         final snackBar =
-                            SnackBar(content: Text('Number copied!'));
+                            SnackBar(content: Text('A\\C Number copied!'));
                         globalKey.currentState.showSnackBar(snackBar);
                       },
                       icon: Icon(FontAwesomeIcons.copy),
@@ -77,14 +87,13 @@ class _BkashPaymentState extends State<BkashPayment> {
               padding: const EdgeInsets.all(15.0),
             ),
             Text(
-              "এই বিকাশ একাউন্টে ৫০ টাকা অথবা আপনার ইচ্ছানুযায়ী যে কোন পরিমাণ টাকা সেন্ড মানি বা ক্যাশ ইন করে ফিরতি এসএমএস থেকে ট্রানজাকশন আইডি(TrxID) নিচের বক্সে টাইপ করে সাবমিট করুন।",
+              "এই DBBL একাউন্টে ৫০ টাকা অথবা আপনার ইচ্ছানুযায়ী যে কোন পরিমাণ টাকা পাঠিয়ে আপনার এমাউন্টটি নিচের বক্সে টাইপ করে সাবমিট করুন।",
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'TrxID'),
-              maxLength: 10,
+              decoration: InputDecoration(labelText: 'Amount'),
               controller: textController,
             ),
             RaisedButton(

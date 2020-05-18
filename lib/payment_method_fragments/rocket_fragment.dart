@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BkashPayment extends StatefulWidget {
+class RcoketPayment extends StatefulWidget {
   @override
-  _BkashPaymentState createState() => _BkashPaymentState();
+  _RcoketPaymentState createState() => _RcoketPaymentState();
 }
 
-class _BkashPaymentState extends State<BkashPayment> {
-  final String bkashAccountNUmber = "01768212468";
+class _RcoketPaymentState extends State<RcoketPayment> {
+  final String rcoketAccountNumber = "017682124686";
   final globalKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
   @override
@@ -18,7 +18,7 @@ class _BkashPaymentState extends State<BkashPayment> {
       key: globalKey,
       appBar: AppBar(
         title: Center(
-          child: Text("Donate with bKash"),
+          child: Text("Donate with Rcoket"),
         ),
       ),
       body: Padding(
@@ -34,18 +34,15 @@ class _BkashPaymentState extends State<BkashPayment> {
                     ),
                     children: [
                       TextSpan(
-                        text: "বিকাশ নাম্বার:",
+                        text: "রকেট নাম্বার:",
                       ),
                       TextSpan(
-                        text: " " + bkashAccountNUmber.toString(),
+                        text: " " + rcoketAccountNumber.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                           // color: Colors.green,
                         ),
-                      ),
-                      TextSpan(
-                        text: " (personal)",
                       ),
                     ],
                   ),
@@ -56,7 +53,7 @@ class _BkashPaymentState extends State<BkashPayment> {
                     child: OutlineButton.icon(
                       onPressed: () {
                         Clipboard.setData(
-                            new ClipboardData(text: bkashAccountNUmber));
+                            new ClipboardData(text: rcoketAccountNumber));
 
                         final snackBar =
                             SnackBar(content: Text('Number copied!'));
@@ -77,13 +74,13 @@ class _BkashPaymentState extends State<BkashPayment> {
               padding: const EdgeInsets.all(15.0),
             ),
             Text(
-              "এই বিকাশ একাউন্টে ৫০ টাকা অথবা আপনার ইচ্ছানুযায়ী যে কোন পরিমাণ টাকা সেন্ড মানি বা ক্যাশ ইন করে ফিরতি এসএমএস থেকে ট্রানজাকশন আইডি(TrxID) নিচের বক্সে টাইপ করে সাবমিট করুন।",
+              "এই রকেট একাউন্টে ৫০ টাকা অথবা আপনার ইচ্ছানুযায়ী যে কোন পরিমাণ টাকা সেন্ড মানি বা ক্যাশ ইন করে ফিরতি এসএমএস থেকে ট্রানজাকশন আইডি(TxnID) নিচের বক্সে টাইপ করে সাবমিট করুন।",
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'TrxID'),
+              decoration: InputDecoration(labelText: 'TxnID'),
               maxLength: 10,
               controller: textController,
             ),
