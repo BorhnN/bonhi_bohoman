@@ -1,10 +1,15 @@
+import 'package:bonhi_bohoman/donate_now_fragment.dart';
 import 'package:bonhi_bohoman/donor.dart';
 import 'package:bonhi_bohoman/donors_fragment.dart';
+import 'package:bonhi_bohoman/payment_method_fragments/bkash_fragment.dart';
 import 'package:bonhi_bohoman/recipeints_fragment.dart';
 import 'package:bonhi_bohoman/recipient.dart';
+import 'package:bonhi_bohoman/report_issue.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bonhi_bohoman/LoginScreen.dart';
 
 import 'home.dart';
 
@@ -39,13 +44,19 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Recipient> recipientList = List();
   List<Donor> donarList = List();
 
-  void _incrementCounter() {
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(seconds: 1)).then((onValue) {
+      FirebaseAuth.instance.currentUser().then(
+        (currentUser) {
+          if (currentUser == null) {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (BuildContext context) => LoginScreen()));
+          }
+        },
+      );
+    });
     FirebaseDatabase.instance
         .reference()
         .child("recipients")
@@ -88,10 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(FontAwesomeIcons.handshake),
             title: Text('Recipients'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.bug),
+            title: Text("Report Issue"),
+          ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
@@ -110,6 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return DonorsFragment(donarList);
       case 2:
         return RecipientsFragment(recipientList);
+      case 3:
+        return ReportIssue();
       default:
         return Home();
     }

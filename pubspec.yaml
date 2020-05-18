@@ -17,9 +17,15 @@ dependencies:
   firebase_core:
   percent_indicator:
   in_app_update: ^1.1.7
+  flutter_svg:
+  firebase_auth:
+  flutter_auth_buttons:
+  google_sign_in:
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/img/

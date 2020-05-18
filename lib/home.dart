@@ -11,13 +11,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future:
-          FirebaseDatabase.instance.reference().child("campaigns/sust").once(),
+      future: FirebaseDatabase.instance
+          .reference()
+          .child("campaigns/sust/months/202001/details")
+          .once(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data.value;
+          
           double donationProgress =
-              (data['donation_achived'] / data['donation_goal'])
+              (data['raised'] / data['goal'])
                   .clamp(0.0, 1.0);
 
           return ListView(
@@ -32,7 +35,7 @@ class _HomeState extends State<Home> {
                               style: TextStyle(color: Colors.black87),
                               children: [
                             TextSpan(
-                              text: data['donation_achived'].toString(),
+                              text: data['raised'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -51,7 +54,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text: "4" ,
+                              text: data['donorCount'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -92,7 +95,7 @@ class _HomeState extends State<Home> {
                                       "% of goal\n",
                             ),
                             TextSpan(
-                              text: data['donation_goal'].toString(),
+                              text: data['goal'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -108,7 +111,9 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text: (data['donation_expiry']-DateTime.now().day).toString() ,
+                              text:
+                                  (31 - DateTime.now().day)
+                                      .toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -124,7 +129,21 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(5.0),
               ),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    content: Text('Yay! A SnackBar!'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        // Some code to undo the change.
+                      },
+                    ),
+                  );
+
+                  // Find the Scaffold in the widget tree and use
+                  // it to show a SnackBar.
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
                 child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 color: Colors.blue,
                 textColor: Colors.white,
@@ -132,7 +151,7 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: EdgeInsets.all(5.0),
               ),
-              Text(data['campaign_description']),
+              Text(data['description']),
             ],
           );
         } else {
