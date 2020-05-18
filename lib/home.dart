@@ -13,13 +13,14 @@ class _HomeState extends State<Home> {
     return FutureBuilder(
       future: FirebaseDatabase.instance
           .reference()
-          .child("campaigns/sust/details")
+          .child("campaigns/sust/months/202001/details")
           .once(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data.value;
+          
           double donationProgress =
-              (data['totalRaised'] / data['goal'])
+              (data['raised'] / data['goal'])
                   .clamp(0.0, 1.0);
 
           return ListView(
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> {
                               style: TextStyle(color: Colors.black87),
                               children: [
                             TextSpan(
-                              text: data['totalRaised'].toString(),
+                              text: data['raised'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text: "4",
+                              text: data['donorCount'].toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -150,11 +151,11 @@ class _HomeState extends State<Home> {
               Padding(
                 padding: EdgeInsets.all(5.0),
               ),
-              Text(data['campaign_description']),
+              Text(data['description']),
             ],
           );
         } else {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
       },
     );
