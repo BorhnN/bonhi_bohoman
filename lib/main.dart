@@ -44,10 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Recipient> recipientList = List();
   List<Donor> donarList = List();
 
-  void _incrementCounter() {
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
