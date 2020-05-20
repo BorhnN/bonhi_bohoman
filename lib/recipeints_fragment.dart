@@ -14,9 +14,8 @@ class RecipientsFragment extends StatelessWidget {
       itemBuilder: (context, index) {
         var item = list[index];
         return ListTile(
-          title: Text(list[index].name),
-          subtitle: Text(list[index].address),
-          trailing: Image.memory(base64Decode(item.photo)),
+          title: Text(list[index].fullName),
+          subtitle: Text(list[index].location),
         );
       },
     );

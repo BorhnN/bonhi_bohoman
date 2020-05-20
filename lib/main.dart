@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     FirebaseDatabase.instance
         .reference()
-        .child("recipients")
+        .child("campaigns/sust/months/202001/recipients")
         .once()
         .then((DataSnapshot onValue) {
       Map<dynamic, dynamic> recipients = onValue.value;

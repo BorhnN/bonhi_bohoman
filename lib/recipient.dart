@@ -1,18 +1,18 @@
 import 'dart:core';
 
 class Recipient {
-  String name;
-  String phone;
-  String address;
-  String photo;
+  String fullName;
+  String contact;
+  String location;
+  String occupation;
 
   Recipient.fromMap(Map<dynamic, dynamic> value) {
-    name = value['name'];
-    phone = value['phone'];
-    address = value['address'];
-    photo = value['photo'];
+    fullName = value['fullName'];
+    contact = value['contact'];
+    location = value['location'];
+    occupation = value['occupation'];
   }
   String toString() {
-    return "Name: $name, Address: $address";
+    return "Name: $fullName, Address: $location";
   }
 }
