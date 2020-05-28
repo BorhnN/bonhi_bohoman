@@ -60,7 +60,6 @@ class _DbblPaymentState extends State<DbblPayment> {
                   ),
                 ),
                 Expanded(
-                  
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: OutlineButton.icon(
@@ -98,9 +97,10 @@ class _DbblPaymentState extends State<DbblPayment> {
             ),
             RaisedButton(
               onPressed: () {
-                final snackBar =
-                            SnackBar(content: Text("আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
-                        globalKey.currentState.showSnackBar(snackBar);
+                final snackBar = SnackBar(
+                    content: Text(
+                        "আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
+                globalKey.currentState.showSnackBar(snackBar);
               },
               child: Text("Submit"),
               color: Colors.blue,

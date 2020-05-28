@@ -41,7 +41,6 @@ class _RcoketPaymentState extends State<RcoketPayment> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          // color: Colors.green,
                         ),
                       ),
                     ],

@@ -1,3 +1,6 @@
+import 'package:bonhi_bohoman/payment_method_fragments/bkash_fragment.dart';
+import 'package:bonhi_bohoman/payment_method_fragments/dbbl_fragment.dart';
+import 'package:bonhi_bohoman/payment_method_fragments/rocket_fragment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,10 +20,12 @@ class DonateNow extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Container(
             child: ListView(
-          // padding: EdgeInsets.all(15.0),
           children: <Widget>[
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BkashPayment()));
+              },
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
@@ -40,7 +45,10 @@ class DonateNow extends StatelessWidget {
               padding: EdgeInsets.all(paddingBetween),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RcoketPayment()));
+              },
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
@@ -60,7 +68,10 @@ class DonateNow extends StatelessWidget {
               padding: EdgeInsets.all(paddingBetween),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DbblPayment()));
+              },
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(

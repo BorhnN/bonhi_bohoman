@@ -1,3 +1,4 @@
+import 'package:bonhi_bohoman/donate_now_fragment.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -18,10 +19,9 @@ class _HomeState extends State<Home> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           var data = snapshot.data.value;
-          
+
           double donationProgress =
-              (data['raised'] / data['goal'])
-                  .clamp(0.0, 1.0);
+              (data['raised'] / data['goal']).clamp(0.0, 1.0);
 
           return ListView(
             padding: EdgeInsets.all(15.0),
@@ -111,9 +111,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(color: Colors.black87),
                           children: [
                             TextSpan(
-                              text:
-                                  (31 - DateTime.now().day)
-                                      .toString(),
+                              text: (31 - DateTime.now().day).toString(),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -130,19 +128,8 @@ class _HomeState extends State<Home> {
               ),
               RaisedButton(
                 onPressed: () {
-                  final snackBar = SnackBar(
-                    content: Text('Yay! A SnackBar!'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-                        // Some code to undo the change.
-                      },
-                    ),
-                  );
-
-                  // Find the Scaffold in the widget tree and use
-                  // it to show a SnackBar.
-                  Scaffold.of(context).showSnackBar(snackBar);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DonateNow()));
                 },
                 child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 color: Colors.blue,
