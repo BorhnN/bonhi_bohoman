@@ -42,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Recipient> recipientList = List();
   List<Donor> donarList = List();
 
+  var defaultCampaignId = "sust";
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     FirebaseDatabase.instance
         .reference()
-        .child("campaigns/sust/months/202001/recipients")
+        .child("campaigns/$defaultCampaignId/months/202001/recipients")
         .once()
         .then((DataSnapshot onValue) {
       Map<dynamic, dynamic> recipients = onValue.value;
@@ -119,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget getbody() {
     switch (_selectedIndex) {
       case 0:
-        return Home();
+        return Home(campaignId: defaultCampaignId);
       case 1:
         return DonorsFragment(donarList);
       case 2:
@@ -127,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         return ReportIssue();
       default:
-        return Home();
+        return Home(campaignId: defaultCampaignId);
     }
   }
 }
