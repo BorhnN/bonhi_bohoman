@@ -22,6 +22,7 @@ dependencies:
   flutter_auth_buttons:
   google_sign_in:
   skeleton_text: ^1.0.0
+  progress_indicators:
 dev_dependencies:
   flutter_test:
     sdk: flutter

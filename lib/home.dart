@@ -162,11 +162,11 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.all(5.0),
               ),
               RaisedButton(
+                child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DonateNow()));
+                      MaterialPageRoute(builder: (context) => DonateNow(campaignId: widget.campaignId)));
                 },
-                child: const Text('Donate', style: TextStyle(fontSize: 20)),
                 color: Colors.blue,
                 textColor: Colors.white,
               ),

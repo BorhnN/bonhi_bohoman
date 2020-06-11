@@ -1,11 +1,16 @@
 import 'package:bonhi_bohoman/payment_method_fragments/bkash_fragment.dart';
 import 'package:bonhi_bohoman/payment_method_fragments/dbbl_fragment.dart';
 import 'package:bonhi_bohoman/payment_method_fragments/rocket_fragment.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class DonateNow extends StatelessWidget {
+  final String campaignId;
+
+  const DonateNow({@required this.campaignId});
   @override
   Widget build(BuildContext context) {
     final double buttonHeight = 35.0;
@@ -32,10 +37,28 @@ class DonateNow extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SvgPicture.asset(
-                      "assets/img/bkash.svg",
-                      height: buttonHeight,
-                    ),
+                    FutureBuilder(
+                        future: FirebaseDatabase.instance
+                            .reference()
+                            .child("campaigns/$campaignId/accounts/bKash")
+                            .orderByChild("enabled")
+                            .equalTo(true)
+                            .once(),
+                        builder: (context, snapshot) {
+                          var isEnabled = snapshot.data.value != null;
+                          return Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: <Widget>[
+                                SvgPicture.asset(
+                                  "assets/img/bkash.svg",
+                                  height: buttonHeight,
+                                ),
+                                Opacity(
+                                  child: JumpingDotsProgressIndicator(),
+                                  opacity: isEnabled ? 0 : 0,
+                                ),
+                              ]);
+                        }),
                   ],
                 ),
               ),
