@@ -9,12 +9,11 @@ import 'package:progress_indicators/progress_indicators.dart';
 
 class DonateNow extends StatelessWidget {
   final String campaignId;
+  final double paddingBetween = 10;
 
   const DonateNow({@required this.campaignId});
   @override
   Widget build(BuildContext context) {
-    final double buttonHeight = 35.0;
-    final double paddingBetween = 10;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -26,113 +25,96 @@ class DonateNow extends StatelessWidget {
         child: Container(
             child: ListView(
           children: <Widget>[
-            RaisedButton(
+            getDonationBadgeFor(
+              serviceName: "bKash",
+              badgeAsset: "assets/img/bkash.svg",
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BkashPayment()));
               },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FutureBuilder(
-                        future: FirebaseDatabase.instance
-                            .reference()
-                            .child("campaigns/$campaignId/accounts/bKash")
-                            .orderByChild("enabled")
-                            .equalTo(true)
-                            .once(),
-                        builder: (context, snapshot) {
-                          var isEnabled = snapshot.data.value != null;
-                          return Stack(
-                              alignment: AlignmentDirectional.center,
-                              children: <Widget>[
-                                SvgPicture.asset(
-                                  "assets/img/bkash.svg",
-                                  height: buttonHeight,
-                                ),
-                                Opacity(
-                                  child: JumpingDotsProgressIndicator(),
-                                  opacity: isEnabled ? 0 : 0,
-                                ),
-                              ]);
-                        }),
-                  ],
-                ),
-              ),
-              color: Colors.white,
             ),
             Padding(
               padding: EdgeInsets.all(paddingBetween),
             ),
-            RaisedButton(
+            getDonationBadgeFor(
+              serviceName: "Rocket",
+              badgeAsset: "assets/img/rocket.svg",
+              color: Color(0xff85278B),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RcoketPayment()));
+                    MaterialPageRoute(builder: (context) => RocketPayment()));
               },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SvgPicture.asset(
-                      "assets/img/rocket.svg",
-                      height: buttonHeight,
-                    ),
-                  ],
-                ),
-              ),
-              color: Color(0xff85278B),
             ),
             Padding(
               padding: EdgeInsets.all(paddingBetween),
             ),
-            RaisedButton(
+            getDonationBadgeFor(
+              serviceName: "DBBL",
+              badgeAsset: "assets/img/dbbl.svg",
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => DbblPayment()));
               },
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SvgPicture.asset(
-                      "assets/img/dbbl.svg",
-                      height: buttonHeight,
-                    ),
-                  ],
-                ),
-              ),
-              color: Colors.white,
             ),
             Padding(
               padding: EdgeInsets.all(paddingBetween),
             ),
-            RaisedButton(
-              onPressed: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SvgPicture.asset(
-                      "assets/img/paypal.svg",
-                      height: buttonHeight,
-                    ),
-                  ],
-                ),
-              ),
-              color: Color(0xffF8BF37),
-            ),
+            getDonationBadgeFor(
+                serviceName: "Paypal",
+                badgeAsset: "assets/img/paypal.svg",
+                onPressed: null)
           ],
         )),
       ),
+    );
+  }
+
+  Widget getDonationBadgeFor(
+      {@required String serviceName,
+      @required String badgeAsset,
+      @required dynamic onPressed,
+      color = Colors.white}) {
+    return FutureBuilder(
+      future: FirebaseDatabase.instance
+          .reference()
+          .child("campaigns/$campaignId/accounts/$serviceName")
+          .orderByChild("enabled")
+          .equalTo(true)
+          .once(),
+      builder: (context, snapshot) {
+        var isLoading = snapshot.data == null;
+        var isEnabled = snapshot.data?.value != null;
+        return RaisedButton(
+          onPressed: onPressed,
+          color: color,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    Opacity(
+                      child: SvgPicture.asset(
+                        badgeAsset,
+                        height: 35.0,
+                        color: isEnabled ? null : Colors.grey,
+                      ),
+                      opacity: isLoading ? 0 : 1,
+                    ),
+                    Opacity(
+                      child: JumpingDotsProgressIndicator(),
+                      opacity: isLoading ? 1 : 0,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
