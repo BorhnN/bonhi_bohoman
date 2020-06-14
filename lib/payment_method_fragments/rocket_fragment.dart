@@ -1,9 +1,14 @@
+import 'package:bonhi_bohoman/account.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RocketPayment extends StatefulWidget {
+  final Account account;
+
+  RocketPayment(this.account);
+
   @override
   _RocketPaymentState createState() => _RocketPaymentState();
 }
@@ -85,9 +90,10 @@ class _RocketPaymentState extends State<RocketPayment> {
             ),
             RaisedButton(
               onPressed: () {
-                final snackBar =
-                            SnackBar(content: Text("আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
-                        globalKey.currentState.showSnackBar(snackBar);
+                final snackBar = SnackBar(
+                    content: Text(
+                        "আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
+                globalKey.currentState.showSnackBar(snackBar);
               },
               child: Text("Submit"),
               color: Colors.blue,

@@ -1,16 +1,19 @@
+import 'package:bonhi_bohoman/account.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DbblPayment extends StatefulWidget {
+  final Account account;
+
+  DbblPayment(this.account);
+
   @override
   _DbblPaymentState createState() => _DbblPaymentState();
 }
 
 class _DbblPaymentState extends State<DbblPayment> {
-  final String dbblAccountNumber = "7017016091638";
-  final String dbblAccountName = "MD Shaleh Islam Tonmoy";
   final globalKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
   @override
@@ -38,7 +41,7 @@ class _DbblPaymentState extends State<DbblPayment> {
                         text: "DBBL A\\C Name:",
                       ),
                       TextSpan(
-                        text: " " + dbblAccountName,
+                        text: widget.account.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // fontSize: 16,
@@ -49,7 +52,7 @@ class _DbblPaymentState extends State<DbblPayment> {
                         text: "\nDBBL A\\C Number:",
                       ),
                       TextSpan(
-                        text: " " + dbblAccountNumber,
+                        text: widget.account.accNo,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // fontSize: 18,
@@ -65,8 +68,7 @@ class _DbblPaymentState extends State<DbblPayment> {
                     child: OutlineButton.icon(
                       onPressed: () {
                         Clipboard.setData(
-                            new ClipboardData(text: dbblAccountNumber));
-
+                            new ClipboardData(text: widget.account.accNo));
                         final snackBar =
                             SnackBar(content: Text('A\\C Number copied!'));
                         globalKey.currentState.showSnackBar(snackBar);

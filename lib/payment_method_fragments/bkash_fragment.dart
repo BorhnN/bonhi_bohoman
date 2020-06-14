@@ -1,15 +1,19 @@
+import 'package:bonhi_bohoman/account.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BkashPayment extends StatefulWidget {
+  final Account account;
+
+  BkashPayment(this.account);
+
   @override
   _BkashPaymentState createState() => _BkashPaymentState();
 }
 
 class _BkashPaymentState extends State<BkashPayment> {
-  final String bkashAccountNUmber = "01768212468";
   final globalKey = GlobalKey<ScaffoldState>();
   final textController = TextEditingController();
   @override
@@ -37,7 +41,7 @@ class _BkashPaymentState extends State<BkashPayment> {
                         text: "বিকাশ নাম্বার:",
                       ),
                       TextSpan(
-                        text: " " + bkashAccountNUmber.toString(),
+                        text: widget.account.accNo,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -56,7 +60,7 @@ class _BkashPaymentState extends State<BkashPayment> {
                     child: OutlineButton.icon(
                       onPressed: () {
                         Clipboard.setData(
-                            new ClipboardData(text: bkashAccountNUmber));
+                            new ClipboardData(text: widget.account.accNo));
 
                         final snackBar =
                             SnackBar(content: Text('Number copied!'));
@@ -89,9 +93,10 @@ class _BkashPaymentState extends State<BkashPayment> {
             ),
             RaisedButton(
               onPressed: () {
-                final snackBar =
-                            SnackBar(content: Text("আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
-                        globalKey.currentState.showSnackBar(snackBar);
+                final snackBar = SnackBar(
+                    content: Text(
+                        "আপনার সাহায্যের জন্য ধন্যবাদ। আপনার তথ্যটি সংরক্ষিত হয়েছে। ২৪ ঘন্টার ভিতরে আপনার প্রোফাইলে না দেখালে রিপোর্ট করুন।"));
+                globalKey.currentState.showSnackBar(snackBar);
               },
               child: Text("Submit"),
               color: Colors.blue,
